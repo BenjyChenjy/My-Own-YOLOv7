@@ -125,8 +125,17 @@ def detect(save_img=False):
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
 
                     if save_img or view_img:  # Add bbox to image
-                        label = f'{names[int(cls)]} {conf:.2f}'
-                        plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
+                        xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
+                        _,_,w,_ = xywh
+                        #print(str(w))
+                        #print(type(w))
+                        D = 4892 * 1.8 / (w * 4912)
+                        print(D)
+                        d = str(D)
+                        label1 = f'{names[int(cls)]}'
+                        if (label1 == 'car rear'):
+                            label = f'{conf:.2f}   {d}'
+                            plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
 
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
