@@ -134,7 +134,7 @@ def detect(save_img=False):
                         d = str(D)
                         label1 = f'{names[int(cls)]}'
                         if (label1 == 'car rear'):
-                            label = f'{conf:.2f}   {d}'
+                            label = f'{conf:.2f}   {d:.2f}'
                             plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
 
             # Print time (inference + NMS)
