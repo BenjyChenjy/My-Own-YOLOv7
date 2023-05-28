@@ -125,8 +125,7 @@ def detect(save_img=False):
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
 
                     if save_img or view_img:  # Add bbox to image
-                        dis = [int(e_.item()) for e_ in xyxy]
-                        label = f'{names[int(cls)]} {conf:.2f}'+ "Praise the Lord" + str(dis)
+                        label = f'{names[int(cls)]} {conf:.2f}'+ " Praise the Lord " + str(2)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
 
             # Print time (inference + NMS)
